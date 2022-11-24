@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        #student1{
+            width: 176px;
+        }
+        #student2{
+            width: 166px;
+        }
+        #student3{
+            width: 176px;
+        }
+       
+       #i4>p{
+        margin:0px;
+       }
+        
+        #student5{
+            width: 176px;
+        }
+        
+    </style>
+</head>
+
+
+<body>
+    <div><p class =".students" id = "student1"></p></div>
+    <div><p class =".students" id = "student2"></p></div>
+    <div><p class =".students" id = "student3"></p></div>
+    <div id="i4">
+        <p id = "name4"></p>
+        <p id = "adress4"></p>
+        <p id = "phone4"></p>
+        <p id = "course4"></p>
+    </div>
+    <div><p class =".students" id = "student5"></p></div>
+   
+    <script>
+        var data = null;
+        function Student(name, adress, phone, course) {
+            this.name = name;
+            this.adress = adress;
+            this.phone = phone;
+            this.course = course;
+
+            
+
+            this.getInfo = function () {
+                return ("Name: " + this.name + '\n' + "Adress: " + this.adress + '\n' + "phone: " + this.phone + '\n' + "course: " + this.course);
+
+            }
+
+        }
+
+       
+        async function getData() {
+            
+            
+            let response = await fetch('https://v-dresevic.github.io/Advanced-JavaScript-Programming/data/students.txt');
+            if (response.status !== 200) {
+                throw new Error("Error while reading file.");
+            }
+            var text = await response.text();
+
+
+            
+            const at = text.split("\n");
+            console.log(at[6]);
+            var student1 = new Student(at[0],at[1],at[2],at[3]);
+            var student2 = new Student(at[4],at[5],at[6],at[7]);
+            var student3 = new Student(at[8],at[9],at[10],at[11]);
+            var student4 = new Student(at[12],at[13],at[14],at[15]);
+            var student5 = new Student(at[16],at[17],at[18],at[19]);
+            student1.getInfo();
+            student2.getInfo();
+            student3.getInfo();
+            student4.getInfo();
+            student5.getInfo();
+            document.getElementById("student1").innerHTML=student1.getInfo();
+            document.getElementById("student2").innerHTML=student2.getInfo();
+            document.getElementById("student3").innerHTML=student3.getInfo();
+            document.getElementById("name4").innerHTML="Name: " + at[12]; 
+            document.getElementById("adress4").innerHTML="Adress: " + at[13]; 
+            document.getElementById("phone4").innerHTML= "Phone: " + at[14] ;
+            document.getElementById("course4").innerHTML= "Course: " + at[15];
+
+            document.getElementById("student5").innerHTML=student5.getInfo();
+        }
+        getData();
+
+
+
+
+
+
+
+
+        student1.getInfo();
+
+
+    </script>
+</body>
+
+</html>
